@@ -25,8 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen w-screen`}
       >
+        <header className="w-full h-16 bg-gray-200 flex items-center justify-center">
+          <h1 className="text-2xl font-bold">INTERVIEW TIMES</h1>
+        </header>
         {children}
       </body>
     </html>

@@ -26,7 +26,7 @@ export default function Home() {
       <div className="space-y-4">
         <input
           className="border border-gray-300 rounded-md p-2 w-full"
-          type="text"
+          type="textarea"
           name="answer"
           id="answer"
           disabled={isLoading}
