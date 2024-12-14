@@ -17,7 +17,7 @@ export default function Home() {
         ?.value;
       const res = await getApiUtils().getHello(answer);
       setArticleResultData({ content: res.message });
-      router.push("/playground/yamaji/result");
+      router.push("/result");
     } catch (error) {
       console.error("エラー:", error);
     } finally {
