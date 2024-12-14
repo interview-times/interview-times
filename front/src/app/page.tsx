@@ -74,18 +74,6 @@ export default function AudioRecorder() {
     setIsRecording(false);
   };
 
-  const handleDownload = () => {
-    if (!audioURL) return;
-
-    // ダウンロードリンクを作成
-    const a = document.createElement("a");
-    a.href = audioURL;
-    a.download = `recording-${new Date().toISOString()}.webm`; // ファイル名を設定
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
   return (
     <div className="mt-11 w-full p-4 space-y-4 flex flex-col items-center justify-center">
       <div className="mt-11 w-full p-4 space-y-4 flex flex-col items-center justify-center">
@@ -160,17 +148,6 @@ export default function AudioRecorder() {
             </div>
           </>
         )}
-        {/* {audioURL && (
-        <div className="space-y-4">
-          <audio src={audioURL} controls className="w-full" />
-          <button
-            onClick={handleDownload}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-          >
-            録音データをダウンロード
-          </button>
-        </div>
-      )} */}
       </div>
     </div>
   );
