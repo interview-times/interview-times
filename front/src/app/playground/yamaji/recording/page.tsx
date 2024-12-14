@@ -1,5 +1,6 @@
 "use client";
 
+import { getApiUtils } from "@/utils/api-utils";
 import { useState, useRef } from "react";
 
 export default function AudioRecorder() {
@@ -7,6 +8,7 @@ export default function AudioRecorder() {
   const [audioURL, setAudioURL] = useState<string | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const { postRecord } = getApiUtils();
 
   const startRecording = async () => {
     try {
@@ -24,8 +26,14 @@ export default function AudioRecorder() {
         }
       };
 
-      mediaRecorder.onstop = () => {
+      mediaRecorder.onstop = async () => {
         const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        try {
+          const resp = await postRecord(blob);
+          console.log(resp);
+        } catch (error) {
+          console.error(error);
+        }
         const url = URL.createObjectURL(blob);
         setAudioURL(url);
       };
@@ -37,7 +45,7 @@ export default function AudioRecorder() {
     }
   };
 
-  const stopRecording = () => {
+  const stopRecording = async () => {
     if (!mediaRecorderRef.current) return;
 
     mediaRecorderRef.current.stop();
