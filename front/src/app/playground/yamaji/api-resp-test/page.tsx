@@ -22,14 +22,14 @@ export default function Home() {
   };
 
   return (
-    <div className="w-screen h-screen grid place-content-center">
-      <div className="space-y-4">
-        <input
-          className="border border-gray-300 rounded-md p-2 w-full"
-          type="textarea"
+    <div className="w-full h-full flex flex-col items-center justify-center p-8">
+      <div className="space-y-4 w-full">
+        <textarea
+          className="border border-gray-300 rounded-md p-2 w-full h-64"
           name="answer"
           id="answer"
           disabled={isLoading}
+          placeholder="ここにきっかけを入力してください"
         />
         <button
           onClick={onClickSend}
@@ -38,7 +38,7 @@ export default function Home() {
         >
           {isLoading ? "送信中..." : "送信"}
         </button>
-        <div className="mt-4 p-8 border-2 border-gray-300 rounded-md w-full h-64 overflow-auto">
+        <div className="mt-4 p-2 border-2 border-gray-300 rounded-md w-full h-64 overflow-auto">
           {hello}
         </div>
       </div>
