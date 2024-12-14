@@ -1,11 +1,14 @@
 "use client";
 
+import { useArticleResultData } from "@/contexts/article-result-data.context";
 import { getApiUtils } from "@/utils/api-utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
-  const [hello, setHello] = useState("");
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const { setArticleResultData } = useArticleResultData();
 
   const onClickSend = async () => {
     try {
@@ -13,7 +16,8 @@ export default function Home() {
       const answer = (document.getElementById("answer") as HTMLInputElement)
         ?.value;
       const res = await getApiUtils().getHello(answer);
-      setHello(res.message);
+      setArticleResultData({ content: res.message });
+      router.push("/result");
     } catch (error) {
       console.error("エラー:", error);
     } finally {
@@ -38,9 +42,6 @@ export default function Home() {
         >
           {isLoading ? "送信中..." : "送信"}
         </button>
-        <div className="mt-4 p-2 border-2 border-gray-300 rounded-md w-full h-64 overflow-auto">
-          {hello}
-        </div>
       </div>
     </div>
   );
