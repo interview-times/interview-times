@@ -139,7 +139,7 @@ export default function AudioRecorder() {
                 ? "インタビューが終了しました！"
                 : "インタビューを始めてください"}
             </h1>
-            <div className="mt-12 items-center justify-center">
+            <div className="mt-12 items-center justify-center flex flex-col">
               <div className="w-[200] h-[200] bg-[#F5F5F5] rounded-full flex items-center justify-center relative mb-5 mt-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
