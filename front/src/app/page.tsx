@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button"
 
 export default function AudioRecorder() {
   const [isRecording, setIsRecording] = useState(false);
@@ -62,6 +63,7 @@ export default function AudioRecorder() {
   return (
     <div className="w-full h-full p-4 space-y-4 flex flex-col items-center justify-center">
       <div className="flex gap-4">
+        <Button>テスト</Button>
         {!isRecording ? (
           <button
             onClick={startRecording}
