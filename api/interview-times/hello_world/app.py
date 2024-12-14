@@ -13,11 +13,10 @@ def lambda_handler(event, context):
             {"role": "system", "content": "You are a helpful assistant."},
             {
                 "role": "user",
-                "content": answer
+                "content": "あなたはインタビューのライターです。次に与えられる文章はインタビューの文字起こしであり、意味に関係のないノイズが含まれています。それらを取り除き、文章をわかりやすい形に修正してください。ただし、要約というよりは、あくまで文章を整えて修正する程度にとどめてください。出力形式は文字列のみの形にしてください。" + answer
             }
         ]
     )
-    print(completion.choices[0].message.content)
     
     return {
         "statusCode": 200,
