@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ArticleResultDataProvider } from "@/contexts/article-result-data.context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,7 @@ export default function RootLayout({
         <header className="w-full h-16 bg-gray-200 flex items-center justify-center">
           <h1 className="text-2xl font-bold">INTERVIEW TIMES</h1>
         </header>
-        {children}
+        <ArticleResultDataProvider>{children}</ArticleResultDataProvider>
       </body>
     </html>
   );
