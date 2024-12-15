@@ -5,7 +5,11 @@ export class AudioPlayer {
   private isPlaying: boolean = false;
 
   constructor() {
-    this.audioContext = new AudioContext();
+    // クライアントサイドでのみ初期化
+    if (typeof window !== "undefined") {
+      this.audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+    }
   }
 
   async loadAudio(url: string): Promise<void> {

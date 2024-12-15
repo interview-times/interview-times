@@ -12,8 +12,8 @@ export const getApiUtils = () => ({
       const reader = new FileReader();
       reader.onload = async () => {
         const base64 = (reader.result as string).split(",")[1];
-        console.log(base64);
-        const response = await fetch("/api-yamaji/", {
+        // console.log(base64);
+        const response = await fetch("/api/", {
           method: "POST",
           body: JSON.stringify({
             record: base64,
@@ -26,7 +26,7 @@ export const getApiUtils = () => ({
           throw new Error("アップロードに失敗しました");
         }
         const result = await response.json();
-        console.log("アップロード成功:", result);
+        // console.log("アップロード成功:", result);
         resolve(result);
       };
 

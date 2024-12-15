@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         destination: `${endpointUrl}/:path*`,
       },
       {
+        source: "/api/",
+        destination: `${endpointUrl}/`,
+      },
+      {
         source: "/api-yamaji/:path*",
         destination: `${yamajiEndpointUrl}/:path*`,
       },
