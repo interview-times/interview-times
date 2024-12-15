@@ -9,6 +9,19 @@ export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { setArticleResultData } = useArticleResultData();
+  const [companyName, setCompanyName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const handleConfirm = () => {
+    setCompanyName(
+      (document.getElementById("companyName") as HTMLInputElement)?.value || ""
+    );
+    setProductName(
+      (document.getElementById("productName") as HTMLInputElement)?.value || ""
+    );
+    setIsConfirmed(true);
+  };
 
   const onClickSend = async () => {
     try {
@@ -25,7 +38,7 @@ export default function Home() {
       )?.value;
       const res = await getApiUtils().getHello(
         JSON.stringify({
-          trigger,
+          trigger: `このインタビューは${companyName}様の${productName}について行われたものです。${trigger}`,
           crisis,
           turningPoint,
           achievement,
@@ -47,7 +60,34 @@ export default function Home() {
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
         </div>
       ) : (
-        <div className="space-y-4 w-full">
+        <div className="space-y-4 w-full p-4">
+          <div className="w-1/2 mx-auto h-64 flex flex-col items-center justify-center space-y-4 border-2 border-gray-300 rounded-md p-4 mb-16">
+            <p className="text-xl font-bold">
+              最初に会社名とプロダクト名を入力してください
+            </p>
+            <input
+              type="text"
+              className="text-xl font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="companyName"
+              placeholder="会社名"
+              defaultValue="株式会社だいなぽんず"
+              disabled={isConfirmed}
+            />
+            <input
+              type="text"
+              className="text-xl font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="productName"
+              placeholder="プロダクト名"
+              defaultValue="INTERVIEW TIMES"
+              disabled={isConfirmed}
+            />
+            <button
+              className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 ease-in-out shadow-md hover:shadow-lg"
+              onClick={handleConfirm}
+            >
+              確定
+            </button>
+          </div>
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold">きっかけ</h2>
             <p className="text-sm text-gray-500">
@@ -107,7 +147,7 @@ export default function Home() {
           <button
             onClick={onClickSend}
             className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:bg-gray-400"
-            disabled={isLoading}
+            disabled={isLoading || !isConfirmed}
           >
             {isLoading ? "送信中..." : "送信"}
           </button>

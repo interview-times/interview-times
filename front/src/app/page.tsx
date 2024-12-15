@@ -20,6 +20,19 @@ export default function AudioRecorder() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const { setArticleResultData } = useArticleResultData();
   const [isLoading, setIsLoading] = useState(false);
+  const [companyName, setCompanyName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const handleConfirm = () => {
+    setCompanyName(
+      (document.getElementById("companyName") as HTMLInputElement)?.value || ""
+    );
+    setProductName(
+      (document.getElementById("productName") as HTMLInputElement)?.value || ""
+    );
+    setIsConfirmed(true);
+  };
 
   useEffect(() => {
     // マウント時の処理
@@ -116,6 +129,11 @@ export default function AudioRecorder() {
               ? "turning_point"
               : "achievement"]: transcript,
           }));
+          if (count === 0) {
+            setAnswers((prevAnswers) => ({
+              trigger: `このインタビューは${companyName}様の${productName}について行われたものです。${prevAnswers.trigger}`,
+            }));
+          }
         } catch (error) {
           console.error(error);
         } finally {
@@ -149,6 +167,31 @@ export default function AudioRecorder() {
         </div>
       ) : (
         <div className="mt-11 w-full p-4 space-y-4 flex flex-col items-center justify-center">
+          <div className="w-1/2 mx-auto h-64 flex flex-col items-center justify-center space-y-4 border-2 border-gray-300 rounded-md p-4 mb-16">
+            <p className="text-xl font-bold">
+              最初に会社名とプロダクト名を入力してください
+            </p>
+            <input
+              type="text"
+              className="text-xl font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="companyName"
+              placeholder="会社名"
+              disabled={isConfirmed}
+            />
+            <input
+              type="text"
+              className="text-xl font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="productName"
+              placeholder="プロダクト名"
+              disabled={isConfirmed}
+            />
+            <button
+              className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 ease-in-out shadow-md hover:shadow-lg"
+              onClick={handleConfirm}
+            >
+              確定
+            </button>
+          </div>
           {isStarted ? (
             <>
               {/* インタビューが始まっている場合 */}
@@ -213,7 +256,8 @@ export default function AudioRecorder() {
                 </div>
                 <Button
                   onClick={handleClick}
-                  className="mt-24 font-bold text-base px-10 py-5 min-w-70"
+                  className="mt-24 font-bold text-base px-10 py-5 min-w-70 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!isConfirmed}
                 >
                   {isFinished
                     ? "終了して記事を確認する"
