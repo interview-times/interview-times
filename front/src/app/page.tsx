@@ -52,9 +52,16 @@ export default function AudioRecorder() {
       if (audioPlayer) {
         audioPlayer.dispose();
       }
-      const res = await getApiUtils().getHello(JSON.stringify(answers));
-      setArticleResultData({ content: res.message });
-      router.push("/result");
+      setIsLoading(true);
+      try {
+        const res = await getApiUtils().getHello(JSON.stringify(answers));
+        setArticleResultData({ content: res.message });
+        router.push("/result");
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       setIsStarted(true);
     }
