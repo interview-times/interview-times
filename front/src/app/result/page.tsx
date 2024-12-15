@@ -4,9 +4,8 @@ import { useArticleResultData } from "@/contexts/article-result-data.context";
 
 export default function Result() {
   const { articleResultData } = useArticleResultData();
-  const { trigger, crisis, turningPoint, achievement } = JSON.parse(
-    articleResultData?.content || ""
-  );
+  const { trigger, crisis, turningPoint, achievement, title, subtitle } =
+    JSON.parse(articleResultData?.content || "");
 
   if (!articleResultData) {
     return <div>データがありません</div>;
@@ -17,12 +16,12 @@ export default function Result() {
       <div className="lg:container mt-6 p-8">
         <input
           type="text"
-          value="タイトル"
+          defaultValue={title}
           className="text-2xl mb-7 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <input
           type="text"
-          value="さぶタイトル"
+          defaultValue={subtitle}
           className="text-xl mb-9 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <div className="rounded-md border-2 border-sky-800 mt-3 mb-9 p-6">
