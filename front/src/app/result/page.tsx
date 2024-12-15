@@ -30,10 +30,9 @@ export default function Result() {
           <div className=" text-sm text-sky-900 font-bold mb-3">
             事業や商品の始まったきっかけを書きます
           </div>
-          <input
-            type="text"
-            value={trigger}
-            className="h-16text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          <textarea
+            defaultValue={trigger}
+            className="h-64 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 whitespace-pre-wrap"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 mb-9 p-6">
@@ -41,10 +40,9 @@ export default function Result() {
           <div className=" text-sm text-sky-900 font-bold mb-3">
             会社や商品開発でつまづいた危機を書きます
           </div>
-          <input
-            type="text"
-            value={crisis}
-            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          <textarea
+            defaultValue={crisis}
+            className="h-64 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 whitespace-pre-wrap"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 mb-9 p-6">
@@ -52,10 +50,9 @@ export default function Result() {
           <div className=" text-sm text-sky-900 font-bold mb-3">
             危機を乗り越えるこえた転期を
           </div>
-          <input
-            type="text"
-            value={turningPoint}
-            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          <textarea
+            defaultValue={turningPoint}
+            className="h-64 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 whitespace-pre-wrap"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 p-6">
@@ -63,10 +60,9 @@ export default function Result() {
           <div className=" text-sm text-sky-900 font-bold mb-3">
             危機を乗り越えるこえた転期を
           </div>
-          <input
-            type="text"
-            value={achievement}
-            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          <textarea
+            defaultValue={achievement}
+            className="h-64 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 whitespace-pre-wrap"
           />
         </div>
       </div>
