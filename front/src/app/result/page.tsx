@@ -4,6 +4,9 @@ import { useArticleResultData } from "@/contexts/article-result-data.context";
 
 export default function Result() {
   const { articleResultData } = useArticleResultData();
+  const { trigger, crisis, turningPoint, achievement } = JSON.parse(
+    articleResultData?.content || ""
+  );
 
   if (!articleResultData) {
     return <div>データがありません</div>;
@@ -29,8 +32,8 @@ export default function Result() {
           </div>
           <input
             type="text"
-            value={articleResultData.content}
-            className="text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            value={trigger}
+            className="h-16text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 mb-9 p-6">
@@ -40,8 +43,8 @@ export default function Result() {
           </div>
           <input
             type="text"
-            value=""
-            className="text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            value={crisis}
+            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 mb-9 p-6">
@@ -51,8 +54,8 @@ export default function Result() {
           </div>
           <input
             type="text"
-            value=""
-            className="text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            value={turningPoint}
+            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div className="rounded-md border-2 border-sky-800 p-6">
@@ -62,8 +65,8 @@ export default function Result() {
           </div>
           <input
             type="text"
-            value=""
-            className="text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            value={achievement}
+            className="h-16 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
       </div>

@@ -13,9 +13,24 @@ export default function Home() {
   const onClickSend = async () => {
     try {
       setIsLoading(true);
-      const answer = (document.getElementById("answer") as HTMLInputElement)
+      const trigger = (document.getElementById("trigger") as HTMLInputElement)
         ?.value;
-      const res = await getApiUtils().getHello(answer);
+      const crisis = (document.getElementById("crisis") as HTMLInputElement)
+        ?.value;
+      const turningPoint = (
+        document.getElementById("turningPoint") as HTMLInputElement
+      )?.value;
+      const achievement = (
+        document.getElementById("achievement") as HTMLInputElement
+      )?.value;
+      const res = await getApiUtils().getHello(
+        JSON.stringify({
+          trigger,
+          crisis,
+          turningPoint,
+          achievement,
+        })
+      );
       setArticleResultData({ content: res.message });
       router.push("/result");
     } catch (error) {
@@ -28,13 +43,58 @@ export default function Home() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-8">
       <div className="space-y-4 w-full">
-        <textarea
-          className="border border-gray-300 rounded-md p-2 w-full h-64"
-          name="answer"
-          id="answer"
-          disabled={isLoading}
-          placeholder="ここにきっかけを入力してください"
-        />
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold">きっかけ</h2>
+          <p className="text-sm text-gray-500">
+            今回ご紹介いただく商品の開発を始めたきっかけや、その際の背景について教えてください。
+          </p>
+          <textarea
+            className="border border-gray-300 rounded-md p-2 w-full h-32"
+            name="trigger"
+            id="trigger"
+            disabled={isLoading}
+            placeholder="ここにきっかけを入力してください"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold">危機</h2>
+          <p className="text-sm text-gray-500">
+            その時の課題や問題は何でしたか？
+          </p>
+          <textarea
+            className="border border-gray-300 rounded-md p-2 w-full h-32"
+            name="crisis"
+            id="crisis"
+            disabled={isLoading}
+            placeholder="ここに危機を入力してください"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold">転機</h2>
+          <p className="text-sm text-gray-500">
+            どのように解決したのか、転期となった出来事を教えてください。
+          </p>
+          <textarea
+            className="border border-gray-300 rounded-md p-2 w-full h-32"
+            name="turning-point"
+            id="turningPoint"
+            disabled={isLoading}
+            placeholder="ここに転機を入力してください"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold">達成</h2>
+          <p className="text-sm text-gray-500">
+            危機や困難を乗り越え、どのように製品開発に成功しましたか？
+          </p>
+          <textarea
+            className="border border-gray-300 rounded-md p-2 w-full h-32"
+            name="achievement"
+            id="achievement"
+            disabled={isLoading}
+            placeholder="ここに達成を入力してください"
+          />
+        </div>
         <button
           onClick={onClickSend}
           className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:bg-gray-400"
