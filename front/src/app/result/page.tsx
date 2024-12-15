@@ -14,15 +14,17 @@ export default function Result() {
   return (
     <div className="flex justify-center">
       <div className="lg:container mt-6 p-8">
+        <p>タイトル</p>
         <input
           type="text"
           defaultValue={title}
-          className="text-2xl mb-7 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="text-4xl mb-7 font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+        <p>サブタイトル</p>
         <input
           type="text"
           defaultValue={subtitle}
-          className="text-xl mb-9 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="text-2xl mb-9 font-bold p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <div className="rounded-md border-2 border-sky-800 mt-3 mb-9 p-6">
           <div className="text-sky-900 text-xl font-bold  mb-2">きっかけ</div>
