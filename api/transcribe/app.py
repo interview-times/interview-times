@@ -14,9 +14,9 @@ def lambda_handler(event, context):
     print(event, context)
     try:
         # API Gatewayからのリクエストボディを取得
-        print("USER_LOG", event['record'])
+        print("USER_LOG", json.loads(event['body'])['record'])
 
-        record_base64 = event['record']
+        record_base64 = json.loads(event['body'])['record']
         if not record_base64:
             raise ValueError('音声データが見つかりません')
 
@@ -91,4 +91,3 @@ def lambda_handler(event, context):
                 'error': 'Internal server error'
             })
         }
-
