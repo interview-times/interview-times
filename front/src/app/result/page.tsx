@@ -4,7 +4,7 @@ import { useArticleResultData } from "@/contexts/article-result-data.context";
 
 export default function Result() {
   const { articleResultData } = useArticleResultData();
-  const { trigger, crisis, turningPoint, achievement, title, subtitle } =
+  const { trigger, crisis, turning_point, achievement, title, subtitle } =
     JSON.parse(articleResultData?.content || "");
 
   if (!articleResultData) {
@@ -52,7 +52,7 @@ export default function Result() {
             危機を乗り越えるこえた転期を
           </div>
           <textarea
-            defaultValue={turningPoint}
+            defaultValue={turning_point}
             className="h-64 text-xl mb-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 whitespace-pre-wrap"
           />
         </div>
