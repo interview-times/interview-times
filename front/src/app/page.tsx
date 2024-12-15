@@ -16,10 +16,22 @@ export default function AudioRecorder() {
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const [audioPlayer] = useState(() => new AudioPlayer());
+  const [audioPlayer, setAudioPlayer] = useState<AudioPlayer | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const { setArticleResultData } = useArticleResultData();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // マウント時の処理
+    const player = new AudioPlayer();
+    setAudioPlayer(player);
+
+    // アンマウント時のクリーンアップ
+    return () => {
+      player.dispose();
+      setAudioPlayer(null);
+    };
+  }, []);
 
   const addCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -36,6 +48,10 @@ export default function AudioRecorder() {
 
   const handleClick = async () => {
     if (isFinished) {
+      // 遷移前にAudioPlayerをクリーンアップ
+      if (audioPlayer) {
+        audioPlayer.dispose();
+      }
       const res = await getApiUtils().getHello(JSON.stringify(answers));
       setArticleResultData({ content: res.message });
       router.push("/result");
@@ -45,6 +61,8 @@ export default function AudioRecorder() {
   };
 
   const startRecording = async () => {
+    if (!audioPlayer) return;
+
     try {
       // 質問を再生
       await audioPlayer.loadAudio(
