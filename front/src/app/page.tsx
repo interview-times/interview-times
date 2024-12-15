@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { interviewNarration } from "@/types/interview-steps";
+import { AudioPlayer } from "@/utils/audio-utils";
 
 export default function AudioRecorder() {
   const router = useRouter();
@@ -10,8 +12,12 @@ export default function AudioRecorder() {
   const [count, setCount] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
+  const [narrationURL, setNarrationURL] = useState<string | null>(
+    interviewNarration.TRIGGER.url
+  );
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const [audioPlayer] = useState(() => new AudioPlayer());
 
   const addCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -36,6 +42,19 @@ export default function AudioRecorder() {
 
   const startRecording = async () => {
     try {
+      // 質問を再生
+      await audioPlayer.loadAudio(
+        count === 0
+          ? interviewNarration.TRIGGER.url
+          : count === 1
+          ? interviewNarration.CRISIS.url
+          : count === 2
+          ? interviewNarration.TURNING_POINT.url
+          : interviewNarration.ACHIEVEMENT.url
+      );
+      await audioPlayer.play();
+
+      // 録音を開始
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: "audio/webm", // ブラウザ互換性のためwebmを使用
