@@ -12,9 +12,6 @@ export default function AudioRecorder() {
   const [count, setCount] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
-  const [narrationURL, setNarrationURL] = useState<string | null>(
-    interviewNarration.TRIGGER.url
-  );
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const [audioPlayer] = useState(() => new AudioPlayer());
