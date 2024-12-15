@@ -9,6 +9,10 @@ def lambda_handler(event, context):
 
     completion = client.chat.completions.create(
         model="gpt-4o",
+#         temperatureの値を追加して0.0に設定した方が良い。0以外だとノイズが入ることがある
+#         以下のようにした方がjsonのリクエストはバグりにくい
+#         最終応答は、'{'で始まり'}'で終わる、または'['で始まり']'で終わるJSONのみを出力し、JSON以外の文字は一切応答に含めないでください。
+
         messages=[
             {
                 "role": "system", 
