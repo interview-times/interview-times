@@ -9,7 +9,6 @@ def lambda_handler(event, context):
 
     completion = client.chat.completions.create(
         model="gpt-4o",
-        temperature=0.0,
         messages=[
             {
                 "role": "system", 
@@ -19,13 +18,14 @@ def lambda_handler(event, context):
                     "「きっかけ(trriger)」「危機(crisis)」「転機(turning_point)」「達成(achievement)」の4カテゴリの質問にターゲットが答えてくれます。",
                     "質問の回答について、各カテゴリ名をプロパティ名に持つjsonで送信します。",
                     "値が空のときはその質問には回答していないものと考えてください。",
+                    "すべての質問に回答の値がある場合には、返却するjsonにtitleとsubtitleというプロパティを追加し、それぞれタイトルとサブタイトルを考えて値を設定してください。",
                     "同じjsonの形式で開発者の回答内容を返してください。",
-                    "応答は、'{'で始まり'}'で終わる、または'['で始まり']'で終わるJSONのみを出力し、JSON以外の文字は一切応答に含めないでください。"
                 ])
             },
             {
                 "role": "user",
-                "content": "" + answer
+                "content": "次に与えられる文章はインタビューの文字起こしであり、意味に関係のないノイズが含まれています。それらを取り除き、文章を感情豊かに、プロダクトのコンセプトを読み取って100文字程度に調整してください。" + answer
+
             }
         ]
     )

@@ -54,6 +54,7 @@ export default function Home() {
             id="trigger"
             disabled={isLoading}
             placeholder="ここにきっかけを入力してください"
+            defaultValue="PR TIMESが地方の中小企業様からあまり利用いただけていない点について、ハッカソンをする機会があった"
           />
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -67,6 +68,7 @@ export default function Home() {
             id="crisis"
             disabled={isLoading}
             placeholder="ここに危機を入力してください"
+            defaultValue="そもそも、プレスリリースとして発信できる新規性の強い事象が地方中小企業では多く起こらないこと。"
           />
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -80,6 +82,7 @@ export default function Home() {
             id="turningPoint"
             disabled={isLoading}
             placeholder="ここに転機を入力してください"
+            defaultValue="PR TIMES STORYというサービスがあるのを発見し、「成果の裏側にあるストーリーをメディアに届ける」というテーマに強く共感した。"
           />
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -93,6 +96,7 @@ export default function Home() {
             id="achievement"
             disabled={isLoading}
             placeholder="ここに達成を入力してください"
+            defaultValue="AIチャットボットを活用した音声による入出力を繰り返すことで、PR TIMES STORYで発信できる記事の作成をサポートする「INTERVIEW TIMES」を開発した。"
           />
         </div>
         <button
